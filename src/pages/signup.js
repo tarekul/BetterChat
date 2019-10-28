@@ -142,7 +142,6 @@ class Signup extends Component {
                   </Grid>
                   <Grid item md={4} sm={3} xs={1}></Grid>
                 </Grid>
-                ;
               </>
             );
           }
