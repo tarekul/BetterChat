@@ -43,7 +43,7 @@ class Signup extends Component {
     const { email, password, confirmPassword, username } = this.state;
     this.setState({ loading: true });
     axios
-      .post("/signup", {
+      .post("https://us-central1-better-f844e.cloudfunctions.net/api/signup", {
         email,
         password,
         confirmPassword,
@@ -74,7 +74,6 @@ class Signup extends Component {
       <AuthContext.Consumer>
         {user => {
           if (!user) {
-            console.log(user);
             return (
               <>
                 <Grid container className={classes.form}>

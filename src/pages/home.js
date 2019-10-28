@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
@@ -45,7 +44,9 @@ class Home extends Component {
     newPost: ""
   };
   componentDidMount() {
-    Axios.get("/posts").then(res => {
+    Axios.get(
+      "https://us-central1-better-f844e.cloudfunctions.net/api/posts"
+    ).then(res => {
       this.setState({ posts: res.data });
     });
   }
@@ -58,13 +59,15 @@ class Home extends Component {
     e.preventDefault();
     if (this.state.newPost.trim() !== "") {
       Axios.post(
-        "/post",
+        "https://us-central1-better-f844e.cloudfunctions.net/api/post",
         {
           body: this.state.newPost
         },
         { headers: { Authorization: "Bearer " + token } }
       ).then(res => {
-        Axios.get("/posts").then(res => {
+        Axios.get(
+          "https://us-central1-better-f844e.cloudfunctions.net/api/posts"
+        ).then(res => {
           this.setState({ posts: [] }, () => {
             this.setState({ posts: res.data, newPost: "" });
           });
