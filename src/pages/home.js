@@ -19,8 +19,7 @@ const styles = {
   grid: {},
   card: {
     marginBottom: "20px",
-    backgroundColor: "rgb(245,245,245)",
-    minHeight: "20%"
+    backgroundColor: "rgb(245,245,245)"
   },
   textField: {
     margin: "10px auto 10px auto"
