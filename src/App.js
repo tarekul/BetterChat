@@ -4,6 +4,7 @@ import "./App.css";
 import AuthContext from "./context/authContext";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
 
 //navbar
 import Navbar from "./components/navbar";
@@ -12,7 +13,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: {
       light: "#33c9dc",
@@ -28,6 +29,8 @@ const theme = createMuiTheme({
     }
   }
 });
+
+theme = responsiveFontSizes(theme);
 
 class App extends Component {
   constructor(props) {

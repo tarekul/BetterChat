@@ -14,9 +14,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import AuthContext from "../context/authContext";
 
 const styles = {
-  grid: {
-    textAlign: "center"
-  },
+  grid: {},
   card: {
     display: "flex",
     marginBottom: "20px",
@@ -27,11 +25,8 @@ const styles = {
     objectFit: "cover"
   },
   content: {
-    padding: 10,
-    margin: "10px auto 10px auto"
-  },
-  date: {
-    marginBottom: 50
+    minWidth: "53%",
+    maxWidth: "53%"
   },
   textField: {
     margin: "10px auto 10px auto"
@@ -93,7 +88,7 @@ class Home extends Component {
                     className={classes.image}
                   />
                   <CardContent className={classes.content}>
-                    <Typography variant="h6" color="primary">
+                    <Typography variant="h5" color="primary">
                       {`@${post.username}`}
                     </Typography>
                     <Typography variant="body1">{post.body}</Typography>
