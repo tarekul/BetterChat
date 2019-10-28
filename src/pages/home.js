@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -16,20 +18,16 @@ import AuthContext from "../context/authContext";
 const styles = {
   grid: {},
   card: {
-    display: "flex",
     marginBottom: "20px",
-    backgroundColor: "rgb(245,245,245)"
-  },
-  image: {
-    minWidth: "25%",
-    objectFit: "cover"
-  },
-  content: {
-    minWidth: "53%",
-    maxWidth: "53%"
+    backgroundColor: "rgb(245,245,245)",
+    minHeight: "20%"
   },
   textField: {
     margin: "10px auto 10px auto"
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60
   }
 };
 
@@ -82,20 +80,19 @@ class Home extends Component {
             posts.map((post, i) => {
               return (
                 <Card className={classes.card} key={i}>
-                  <CardMedia
-                    image={`${post.imageUrl}${post.username}`}
-                    title="user image"
-                    className={classes.image}
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        className={classes.bigAvatar}
+                        src={`${post.imageUrl}${post.username}`}
+                      />
+                    }
+                    title={`@${post.username}`}
+                    subheader={dayjs(post.createdAt).fromNow()}
                   />
-                  <CardContent className={classes.content}>
-                    <Typography variant="h5" color="primary">
-                      {`@${post.username}`}
-                    </Typography>
-                    <Typography variant="body1">{post.body}</Typography>
-                  </CardContent>
-                  <CardContent className={classes.date}>
-                    <Typography variant="caption" color="textSecondary">
-                      {dayjs(post.createdAt).fromNow()}
+                  <CardContent>
+                    <Typography variant="body1" color="secondary">
+                      {post.body}
                     </Typography>
                   </CardContent>
                 </Card>
