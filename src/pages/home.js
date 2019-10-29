@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import SendIcon from "@material-ui/icons/Send";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Axios from "axios";
 import dayjs from "dayjs";
@@ -116,7 +116,7 @@ class Home extends Component {
                       value={this.state.newPost}
                     />
                     <Button variant="contained" color="secondary" type="submit">
-                      Post
+                      <SendIcon />
                     </Button>
                   </form>
                 );
