@@ -27,6 +27,9 @@ const styles = {
   bigAvatar: {
     width: 60,
     height: 60
+  },
+  loading: {
+    marginLeft: "50%"
   }
 };
 
@@ -98,7 +101,7 @@ class Home extends Component {
               );
             })
           ) : (
-            <CircularProgress size={30} />
+            <CircularProgress className={classes.loading} size={30} />
           )}
           <AuthContext.Consumer>
             {user => {
