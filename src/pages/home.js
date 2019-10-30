@@ -153,13 +153,7 @@ class Home extends Component {
             {user => {
               if (user) {
                 return (
-                  <form
-                    noValidate
-                    onSubmit={e => this.handleSubmit(e, user)}
-                    ref={ref => {
-                      this.newData = ref;
-                    }}
-                  >
+                  <form noValidate onSubmit={e => this.handleSubmit(e, user)}>
                     <TextField
                       className={classes.textField}
                       type="text"
@@ -178,6 +172,10 @@ class Home extends Component {
               }
             }}
           </AuthContext.Consumer>
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={ref => (this.newData = ref)}
+          ></div>
         </Grid>
         <Grid item sm={1} md={2}></Grid>
       </Grid>
