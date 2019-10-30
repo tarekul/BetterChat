@@ -41,7 +41,8 @@ const styles = {
 class Home extends Component {
   state = {
     posts: null,
-    newPost: ""
+    newPost: "",
+    scroll: false
   };
   componentDidMount() {
     Axios.get(
@@ -49,6 +50,10 @@ class Home extends Component {
     ).then(res => {
       this.setState({ posts: res.data });
     });
+  }
+
+  componentDidUpdate() {
+    if (this.state.scroll) this.newData.scrollIntoView({ behavior: "smooth" });
   }
 
   handleChange = e => {
@@ -69,7 +74,7 @@ class Home extends Component {
           "https://us-central1-better-f844e.cloudfunctions.net/api/posts"
         ).then(res => {
           this.setState({ posts: [] }, () => {
-            this.setState({ posts: res.data, newPost: "" });
+            this.setState({ posts: res.data, newPost: "", scroll: true });
           });
         });
       });
@@ -148,7 +153,13 @@ class Home extends Component {
             {user => {
               if (user) {
                 return (
-                  <form noValidate onSubmit={e => this.handleSubmit(e, user)}>
+                  <form
+                    noValidate
+                    onSubmit={e => this.handleSubmit(e, user)}
+                    ref={ref => {
+                      this.newData = ref;
+                    }}
+                  >
                     <TextField
                       className={classes.textField}
                       type="text"
