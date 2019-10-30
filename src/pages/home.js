@@ -19,7 +19,12 @@ const styles = {
   grid: {},
   card: {
     marginBottom: "20px",
-    backgroundColor: "rgb(245,245,245)"
+    backgroundColor: "rgb(245,245,245)",
+    minHeight: "180px"
+  },
+  content: {
+    paddingTop: "90px",
+    textAlign: "center"
   },
   textField: {
     margin: "10px auto 10px auto"
@@ -70,6 +75,14 @@ class Home extends Component {
       });
     }
   };
+
+  handleClick = (e, i) => {
+    const { posts } = this.state;
+    if (posts[i].isInvert) delete posts[i].isInvert;
+    else posts[i].isInvert = true;
+    this.setState(this.state.posts);
+    console.log(this.state);
+  };
   render() {
     const { classes } = this.props;
     const { posts } = this.state;
@@ -80,23 +93,51 @@ class Home extends Component {
         <Grid item sm={10} md={8}>
           {posts ? (
             posts.map((post, i) => {
+              let cardlayout;
+              let cardColor = {};
+              if (post.isInvert) {
+                cardColor = { backgroundColor: "#3a0d82" };
+                cardlayout = (
+                  <>
+                    <CardContent className={classes.content}>
+                      <Typography variant="body1" style={{ color: "white" }}>
+                        {post.userCreatedAt
+                          ? `${post.username} created ${dayjs(
+                              post.userCreatedAt
+                            ).fromNow()}`
+                          : "None"}
+                      </Typography>
+                    </CardContent>
+                  </>
+                );
+              } else
+                cardlayout = (
+                  <>
+                    <CardHeader
+                      avatar={
+                        <Avatar
+                          className={classes.bigAvatar}
+                          src={`${post.imageUrl}${post.username}`}
+                        />
+                      }
+                      title={`@${post.username}`}
+                      subheader={dayjs(post.createdAt).fromNow()}
+                    />
+                    <CardContent>
+                      <Typography variant="body1" color="secondary">
+                        {post.body}
+                      </Typography>
+                    </CardContent>
+                  </>
+                );
               return (
-                <Card className={classes.card} key={i}>
-                  <CardHeader
-                    avatar={
-                      <Avatar
-                        className={classes.bigAvatar}
-                        src={`${post.imageUrl}${post.username}`}
-                      />
-                    }
-                    title={`@${post.username}`}
-                    subheader={dayjs(post.createdAt).fromNow()}
-                  />
-                  <CardContent>
-                    <Typography variant="body1" color="secondary">
-                      {post.body}
-                    </Typography>
-                  </CardContent>
+                <Card
+                  className={classes.card}
+                  key={i}
+                  style={cardColor}
+                  onClick={e => this.handleClick(e, i)}
+                >
+                  {cardlayout}
                 </Card>
               );
             })
